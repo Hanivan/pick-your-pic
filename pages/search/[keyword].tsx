@@ -6,7 +6,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import BaseLayout from "@cly/BaseLayout";
-import { ChangeEventHTMLInput, FormHTMLEvent } from "@libs/commons/utils/type";
+import FormSearch from "@csl/Form-Search";
 
 const SearchImage: NextPage = () => {
   const [images, setImages] = useState([]);
@@ -14,8 +14,7 @@ const SearchImage: NextPage = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [fromState, setFromState] = useState(true);
-  const [inputValue, setInputValue] = useState("");
-  const { query, push } = useRouter();
+  const { query } = useRouter();
   const normalizeUrl = new URL(
     `${DEFKEY.BASEURL_API}/search/photos/?query=${query.keyword}&per_page=15&client_id=${process.env.NEXT_PUBLIC_UNSPLASH_API_KEY}`
   );
@@ -35,29 +34,10 @@ const SearchImage: NextPage = () => {
     setFromState(true);
   };
 
-  const handleSubmit = (e: FormHTMLEvent) => {
-    e.preventDefault();
-    push(`/search/${inputValue}`);
-  };
-
-  const handleOnChange = (e: ChangeEventHTMLInput) => {
-    setInputValue(e.target.value);
-    console.log(e.target.value);
-  };
-
   return (
     <BaseLayout title={query.keyword as string}>
       <section className="container-responsive pt-24">
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="search-pic"
-            id="search-pic"
-            className="block bg-white w-full border border-slate-300 rounded-md py-2 pl-3 pr-3 shadow-sm focus:outline-none focus:border-orange-300 focus:ring-orange-300 focus:ring-1 sm:text-sm"
-            placeholder="Cari kucing hd..."
-            onChange={handleOnChange}
-          />
-        </form>
+        <FormSearch />
         <h1 className="text-xl mb-5 mt-2">
           You search:{" "}
           <span className="font-semibold capitalize">{query.keyword}</span>

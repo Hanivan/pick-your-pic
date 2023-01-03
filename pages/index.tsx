@@ -24,7 +24,7 @@ const Welcome: NextPage = () => {
     setLoading(false);
   }, []);
 
-  if (isLoading) return <h1>Loading...</h1>;
+  if (isLoading || !images) return <h1>Loading...</h1>;
 
   const handlePopUp = (id: string) => {
     const i = images.findIndex((image: UnsplashReponse) => image.id === id);
@@ -35,37 +35,39 @@ const Welcome: NextPage = () => {
 
   return (
     <BaseLayout title="Home">
-      <Banner />
-      <section className="container-responsive mt-16">
-        <div className="columns-2 md:columns-3 gap-3 mx-auto space-y-3">
-          {isLoading ? (
-            <h1>Loading...</h1>
-          ) : images.length > 0 ? (
-            images.map((image: UnsplashReponse) => (
-              <CardImage
-                key={image.id}
-                image={image}
-                onClick={() => handlePopUp(image.id)}
-              />
-            ))
-          ) : (
-            <h1>Image Empty</h1>
-          )}
-        </div>
-      </section>
-      {images.length > 0 ? (
-        <CardModal
-          image={images as UnsplashReponse[]}
-          index={imageIndex}
-          visible={showPopUp}
-          isState={fromState}
-          onClick={() => {
-            setShowPopUp((showPopUp) => !showPopUp);
-          }}
-        />
-      ) : (
-        <></>
-      )}
+      <>
+        <Banner />
+        <section className="container-responsive mt-16">
+          <div className="columns-2 md:columns-3 gap-3 mx-auto space-y-3">
+            {isLoading ? (
+              <h1>Loading...</h1>
+            ) : images.length > 0 ? (
+              images.map((image: UnsplashReponse) => (
+                <CardImage
+                  key={image.id}
+                  image={image}
+                  onClick={() => handlePopUp(image.id)}
+                />
+              ))
+            ) : (
+              <h1>Image Empty</h1>
+            )}
+          </div>
+        </section>
+        {images.length > 0 ? (
+          <CardModal
+            image={images as UnsplashReponse[]}
+            index={imageIndex}
+            visible={showPopUp}
+            isState={fromState}
+            onClick={() => {
+              setShowPopUp((showPopUp) => !showPopUp);
+            }}
+          />
+        ) : (
+          <></>
+        )}
+      </>
     </BaseLayout>
   );
 };

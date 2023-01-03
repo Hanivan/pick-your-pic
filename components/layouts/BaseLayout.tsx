@@ -9,10 +9,12 @@ const BaseLayout: NextPage<BaseLayoutProp> = ({
   children,
   useNavbar,
 }) => {
+  const textTitle = `${title} | Pick Your Pic`;
+
   return (
     <>
       <Head>
-        <title>{title || "..."} | Pick Your Pic</title>
+        <title>{textTitle}</title>
       </Head>
       {useNavbar ?? <Navbar />}
       {children}

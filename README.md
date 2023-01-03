@@ -1,27 +1,46 @@
-# Next.js + Tailwind CSS Example
+# Pick Your Pic
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.2)](https://tailwindcss.com/blog/tailwindcss-v3-2) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+This project is provide by [@LevianthProject](https://github.com/LevianthProject) for member [KelasFullstack](https://kelasfullstack.id)
 
-## Deploy your own
+The code for this project is: **Tugas FrontEnd 1**
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+## What Is PYP
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+As it stands, that is, you can view/take a collection of photos from [Unsplash](https://unsplash.com/). The thing to note is, this project is only for education and training skills in the frontend field (will there be backend assignments in the future? hahaha)
 
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-```
+## Usage
+1. Clone this repo
 
 ```bash
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
+mkdir -p ~/Documents/git && git clone --depth=1 https://github.com/Hanivan/pick-your-pic.git ~/Documents/git/pick-your-pic && cd ~/Documents/git/pick-your-pic
 ```
+
+2. Install Dependencies (use `yarn` or `npm`)
 
 ```bash
-pnpm create next-app --example with-tailwindcss with-tailwindcss-app
+yarn install
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+3. Start Server
+
+```bash
+yarn start
+```
+
+or
+
+```bash
+yarn dev
+```
+
+## Development Detail
+
+**Start Work**: Monday, 2 Jan 14:-- WIB<br>
+**Finished Work**: Monday, 2 Jan 16:-- WIB
+
+Thank you for holding this challenge. What I learned from this assignment is that managing state is very tiring. maybe it's time to learn redux?
+
+Tools I used for making this project:
+- [next](https://nextjs.org)
+- [tailwind](https://tailwindcss.com)
+- [Unsplash API](https://unsplash.com/developers)
