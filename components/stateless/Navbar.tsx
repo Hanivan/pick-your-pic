@@ -31,7 +31,7 @@ const hrefLink = [
 
 const Navbar: NextPage = () => {
   return (
-    <nav className="md:flex items-center justify-between md:px-52 rounded-bl rounded-br absolute w-full">
+    <nav className="md:flex items-center justify-between px-4 md:px-6 lg:px-24 rounded-bl rounded-br absolute w-full">
       <Link href={"/"}>
         <div className="flex items-center space-x-2 drop-shadow-xl">
           <div className="w-12 h-12 bg-orange-400 flex items-center justify-center font-bold text-orange-100">
@@ -40,7 +40,7 @@ const Navbar: NextPage = () => {
           <span className="text-orange-400">Pick Your Pic</span>
         </div>
       </Link>
-      <ul className="flex space-x-4 hidden md:flex">
+      <ul className="flex space-x-4 hidden lg:flex">
         {hrefLink.map((it) => (
           <li key={it.href}>
             <Button href={it.href} className={it.className} target={`_blank`}>

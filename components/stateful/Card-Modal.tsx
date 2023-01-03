@@ -1,18 +1,23 @@
-import { UnsplashReponse } from "@libs/commons/payloads/unsplash.response";
+import { CardModalProp } from "@libs/commons/utils/type";
 import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { MouseEventHandler, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-const CardModal: NextPage<{
-  image: UnsplashReponse[];
-  index: number;
-  visible: boolean;
-  isState?: boolean;
-  onClick?: MouseEventHandler<HTMLImageElement> | undefined;
-}> = ({ image, index, visible, onClick, isState }) => {
+const CardModal: NextPage<CardModalProp> = ({
+  image,
+  index,
+  visible,
+  onClick,
+  isState,
+}) => {
+  if (!image || !visible) return null;
+
   const [currIndex, setCurrentIndex] = useState(index);
   const [fromState, setFromState] = useState(true);
+  const imageObj = image[fromState ? index : currIndex];
+  const imageDesc = imageObj?.description || imageObj?.alt_description;
+
   useEffect(() => {
     setCurrentIndex(index);
   }, [index]);
@@ -23,7 +28,6 @@ const CardModal: NextPage<{
     if (currIndex > image.length - 2) {
       setCurrentIndex(0);
     } else {
-      console.log("ok");
       setCurrentIndex((index = currIndex + 1));
     }
   };
@@ -37,17 +41,15 @@ const CardModal: NextPage<{
     }
   };
 
-  if (!image || !visible) return null;
-
   return visible ? (
-    <div className="fixed inset-0 bg-slate-900/30 flex justify-center items-center">
+    <div className="fixed inset-0 bg-slate-900/30 flex justify-center items-center backdrop-blur-xs">
       <div
         className="top-0 right-0 px-4 py-3 hover:cursor-pointer absolute"
         onClick={onClick}
       >
         X
       </div>
-      <div className="w-full h-full flex justify-between items-center">
+      <div className="w-full h-full flex justify-center md:justify-between items-center container-responsive">
         <div
           className="hover:cursor-pointer ml-5 bg-orange-500 p-1 rounded text-slate-100 w-16 text-center hidden md:block"
           onClick={handlePrevImage}
@@ -61,18 +63,15 @@ const CardModal: NextPage<{
                 width={510}
                 height={510}
                 className="shadow-lg rounded"
-                src={image[fromState ? index : currIndex].urls.full}
-                alt={image[fromState ? index : currIndex].id}
+                src={imageObj.urls.regular}
+                alt={imageObj.id}
               />
               <figcaption className="absolute bottom-0 w-full p-3 text-sm bg-slate-800/80 hover:bg-slate-800/800 rounded-tl-[80px] md:rounded-tl-full transition text-slate-100 drop-shadow-lg text-center flex md:flex-row flex-col items-center">
                 <div className="grow">
                   <h5 className="font-bold text-xl">
-                    {image[fromState ? index : currIndex].user.name}
+                    @{imageObj.user.username}
                   </h5>
-                  <p>
-                    {image[fromState ? index : currIndex].description ||
-                      image[fromState ? index : currIndex].alt_description}
-                  </p>
+                  <p>{imageDesc?.substring(0, 80)}</p>
                 </div>
                 <Link
                   rel="nofollow"
@@ -80,7 +79,7 @@ const CardModal: NextPage<{
                   target="_blank"
                   className="mt-2 md:mt-0"
                   title="Download photo"
-                  href={image[fromState ? index : currIndex].links.download}
+                  href={imageObj.links.download}
                 >
                   Download
                 </Link>

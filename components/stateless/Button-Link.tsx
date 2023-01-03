@@ -1,15 +1,6 @@
+import { PropLink } from "@libs/commons/utils/type";
 import { NextPage } from "next";
 import Link from "next/link";
-import { UrlObject } from "url";
-declare type Url = string | UrlObject;
-
-interface PropLink extends React.PropsWithChildren<{}> {
-  href: Url;
-  rel?: string;
-  className?: string;
-  target?: "_blank" | "_parent" | "_self" | "_top";
-  id?: string;
-}
 
 const Button: NextPage<PropLink> = ({
   className,

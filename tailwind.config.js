@@ -17,6 +17,10 @@ module.exports = {
       backgroundImage: {
         banner: "url('/img/bg-pic.jpg')",
       },
+      backdropBlur: {
+        xs: "2px",
+        xxs: "1px",
+      },
       // animation: {
       //   "pulse-slow": "pulse 3s linear infinite",
       // },

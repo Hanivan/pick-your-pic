@@ -4,8 +4,8 @@ import { DEFKEY } from "@libs/commons/constant";
 import { useEffect, useState } from "react";
 import { UnsplashReponse } from "@libs/commons/payloads/unsplash.response";
 import CardImage from "@csl/Card-Image";
-import CardModal from "@csl/Card-Modal";
-import Footer from "@csl/Footer";
+import CardModal from "@csf/Card-Modal";
+import BaseLayout from "@cly/BaseLayout";
 
 const Welcome: NextPage = () => {
   const [images, setImages] = useState([]);
@@ -34,10 +34,10 @@ const Welcome: NextPage = () => {
   };
 
   return (
-    <>
+    <BaseLayout title="Home">
       <Banner />
       <section className="container-responsive mt-16">
-        <div className="columns-3 gap-3 mx-auto space-y-3">
+        <div className="columns-2 md:columns-3 gap-3 mx-auto space-y-3">
           {isLoading ? (
             <h1>Loading...</h1>
           ) : images.length > 0 ? (
@@ -66,8 +66,7 @@ const Welcome: NextPage = () => {
       ) : (
         <></>
       )}
-      <Footer />
-    </>
+    </BaseLayout>
   );
 };
 

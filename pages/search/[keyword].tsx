@@ -1,12 +1,12 @@
 import CardImage from "@csl/Card-Image";
-import CardModal from "@csl/Card-Modal";
-import Footer from "@csl/Footer";
-import Navbar from "@csl/Navbar";
+import CardModal from "@csf/Card-Modal";
 import { DEFKEY } from "@libs/commons/constant";
 import { UnsplashReponse } from "@libs/commons/payloads/unsplash.response";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import BaseLayout from "@cly/BaseLayout";
+import { ChangeEventHTMLInput, FormHTMLEvent } from "@libs/commons/utils/type";
 
 const SearchImage: NextPage = () => {
   const [images, setImages] = useState([]);
@@ -35,19 +35,18 @@ const SearchImage: NextPage = () => {
     setFromState(true);
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormHTMLEvent) => {
     e.preventDefault();
     push(`/search/${inputValue}`);
   };
 
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: ChangeEventHTMLInput) => {
     setInputValue(e.target.value);
     console.log(e.target.value);
   };
 
   return (
-    <>
-      <Navbar />
+    <BaseLayout title={query.keyword as string}>
       <section className="container-responsive pt-24">
         <form onSubmit={handleSubmit}>
           <input
@@ -59,16 +58,11 @@ const SearchImage: NextPage = () => {
             onChange={handleOnChange}
           />
         </form>
-        <h1 className="text-xl mb-2">
-          You Search:{" "}
-          <span className="font-semibold">
-            {String(query.keyword)
-              .split(" ")
-              .map((word) => word[0].toUpperCase() + word.substring(1))
-              .join(" ")}
-          </span>
+        <h1 className="text-xl mb-5 mt-2">
+          You search:{" "}
+          <span className="font-semibold capitalize">{query.keyword}</span>
         </h1>
-        <div className="columns-3 gap-3 mx-auto space-y-3">
+        <div className="columns-2 md:columns-3 gap-3 mx-auto space-y-3">
           {isLoading ? (
             <h1>Loading...</h1>
           ) : images.length > 0 ? (
@@ -80,7 +74,7 @@ const SearchImage: NextPage = () => {
               />
             ))
           ) : (
-            <h1>Loading...</h1>
+            <h1>Image Empty...</h1>
           )}
         </div>
       </section>
@@ -97,8 +91,7 @@ const SearchImage: NextPage = () => {
       ) : (
         <></>
       )}
-      <Footer />
-    </>
+    </BaseLayout>
   );
 };
 
